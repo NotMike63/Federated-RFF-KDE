@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 def gaussian_kernel(h, x, y):
     delta_inner = np.power((x - y), 2)
