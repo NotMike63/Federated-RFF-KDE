@@ -1,11 +1,14 @@
-import pandas as pd
 import numpy as np
+
 class User:
-    def __init__(self, d):
-        self.D = pd.Series() # What exactly would the user's location vector look like?
+    p, q, h = None, None, None
+
+    def __init__(self, p, q):
+        self.p = p
+        self.q = q
 
     # Evaluates G_h(d_i)
-    def evaluate(self, d_i):
+    def evaluate_G(self, d_i, h):
 
     def gaussianKernel(self, ):
     # Return evaluations to the server
@@ -13,21 +16,37 @@ class User:
         Server(destination)
 
 class Server:
-    def __init__(self, corner1, corner2, h):
+    h = None
+    grid_cords = None
+
+    def __init__(self, corner1_x, corner1_y, corner2_x, corner2_y, h):
         self.h = h
 
+        x_vals = np.linspace(corner1_x, corner2_x, abs(corner2_x - corner1_x))
+        y_vals = np.linspace(corner1_y, corner2_y, abs(corner2_y - corner1_y))
+
+        grid_x, grid_y = np.meshgrid(x_vals, y_vals)
+        self.grid_cords = np.vstack([grid_x.ravel(), grid_y.ravel()]).T
 
 
+def federated_KDE(user_locations, server):
 
+    for user in N: # Running in parallel
+        user.evaluate_G()
+        user.returnToServer()
 PxQ =
 if __name__ == "__main__":
 
-    d1, d2, di_1, di = (1, 1), (2, 2), (3, 3), (4, 4)
-    grid_x, grid_y = np.meshgrid(x, y)
-    grid_coords = np.vstack([grid_x.ravel(), grid_y.ravel()]).T
-
     # Inputs
-    N = [User(d1), User(d2), ..., User(di_1), User(di)]
-    for user in N: # Running in parallel
-        user.evaluate()
-        user.returnToServer()
+    x, y = np.linspace(-5, 5, 50), np.linspace(-5, 5, 50)
+    grid_p, grid_q = np.meshgrid(x, y)
+    grid_cords = np.vstack([grid_p.ravel(), grid_q.ravel()]).T
+    N = [User(1, 1), User(1, 2), ..., User(4, 4), User(5, 5)]
+
+    # Server Initialization
+    server = Server(0, 0, 10, 10, 1)
+
+
+    federated_KDE(N, server)
+
+    server.recieve()
