@@ -42,7 +42,7 @@ class Server:
         self.density = np.mean(self.user_estimates, axis=0)
 
     def plot(self, user_locations):
-        plt.imshow(self.density.T, extent=(self.x_min, self.x_max, self.y_min, self.y_max),
+        plt.imshow(self.density, extent=(self.x_min, self.x_max, self.y_min, self.y_max),
                    origin='lower', cmap='hot', aspect='auto')
         plt.colorbar(label='Estimated Density')
         plt.xlabel("X")
@@ -59,11 +59,11 @@ class Server:
 
 if __name__ == "__main__":
     # Initialize server
-    server = Server(0, 0, 10, 10, h=1.0)
+    server = Server(0, 0, 100, 100, h=5)
 
     # Simulate N users
     rng = np.random.default_rng(seed=4)
-    user_locs = rng.uniform(0, 10, size=(1, 2))
+    user_locs = rng.uniform(0, 100, size=(5, 2))
     users = [User(x, y) for x, y in user_locs]
 
     # Federated KDE loop
