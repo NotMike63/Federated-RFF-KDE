@@ -5,6 +5,18 @@ class User:
     def __init__(self, x, y):
         self.location = np.array([x, y])  # d_i
 
+    # KDE with a Gaussian kernel
+    def gaussian_KDE(self, ):
+        gauss_numerator = abs(self.location[0] - self.location[1])
+        delta = gauss_numerator / (2 * self.h)
+        np.e(gauss_numerator / )
+        pass
+
+    # Calculates Probability Matrix
+    def gh(self, grid):
+        for p in range(grid.shape[0]):
+            for q in range(grid.shape[1]):
+                gaussian_KDE()
     def compute_density_grid(self, grid, h):
         P, Q, _ = grid.shape
         out = np.zeros((P, Q))
@@ -59,7 +71,7 @@ class Server:
 
 if __name__ == "__main__":
     # Initialize server
-    server = Server(0, 0, 100, 100, h=5)
+    server = Server(0, 0, 100, 100, h=1)
 
     # Simulate N users
     rng = np.random.default_rng(seed=4)
@@ -71,7 +83,7 @@ if __name__ == "__main__":
     for user in users:
         local_density = user.compute_density_grid(grid, h)  # local computation only
         server.receive_estimate(local_density)              # send result to server
-        print("location: ", user.location)
+        #print("location: ", user.location)
 
     # Final aggregation and plot
     server.finalize_density()

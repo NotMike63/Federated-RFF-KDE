@@ -8,6 +8,18 @@ class User:
         self.h = h
         self.omega = np.random.normal(loc=0.0, scale=1.0 / h, size=(B, 2))  # B x 2
 
+    # KDE with a Gaussian kernel
+    def gaussian_KDE(self, ):
+        gauss_numerator = abs(self.location[0] - self.location[1])
+        np.e(gauss_numerator / (2 * self.h))
+        pass
+
+    # Calculates Probability Matrix
+    def gh(self, grid):
+        for p in range(grid.shape[0]):
+            for q in range(grid.shape[1]):
+                gaussian_KDE()
+
     def compute_rff_density_grid(self, grid):
         P, Q, _ = grid.shape
         out = np.zeros((P, Q))
@@ -71,7 +83,7 @@ class Server:
 if __name__ == "__main__":
     # Server parameters
     B = 10  # number of random features
-    h = 15.0
+    h = 20.0
     server = Server(0, 0, 100, 100, h=h, B=B)
 
     # Simulate N users
@@ -84,7 +96,7 @@ if __name__ == "__main__":
     for user in users:
         local_density = user.compute_rff_density_grid(grid)
         server.receive_estimate(local_density)
-        print("location:", user.location)
+        #print("location:", user.location)
 
     # Final aggregation and plot
     server.finalize_density()
