@@ -6,14 +6,14 @@ class User:
         self.location = np.array([x, y])  # d_i
 
     # KDE with a Gaussian kernel
-    def gaussian_KDE(self, ):
-        gauss_numerator = abs(self.location[0] - self.location[1])
-        delta = gauss_numerator / (2 * self.h)
-        np.e(gauss_numerator / )
-        pass
+    def gaussian_kernel(self, x, d_i, h):
+        delta= abs(d_i[0] - d_i[1]) ** 2
+        gauss_numerator = delta ** 2
+        gauss_denominator = (2 * h) ** 2
+        return np.exp(gauss_numerator/gauss_denominator)
 
     # Calculates Probability Matrix
-    def gh(self, grid):
+    def gh(self, grid, d_i, h):
         for p in range(grid.shape[0]):
             for q in range(grid.shape[1]):
                 gaussian_KDE()
